@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Navigation</title>
     <link rel="stylesheet" href="./styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
 <body>
     <nav>
@@ -14,19 +16,101 @@
         <a href="#profile">Profile</a>
     </nav>
     <main>
-        <section id="home">
-            <h1>Welcome to Netflix</h1>
-            <p>This is the Home section.</p>
-        </section>
-        <section id="movies">
-            <h1>Movies</h1>
-            <p>Explore our collection of movies.</p>
-        </section>
-        <section id="profile">
-            <h1>Your Profile</h1>
-            <p>Manage your account and preferences.</p>
-        </section>
+        <div id="success-message" style="display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); padding: 10px 20px; background-color: rgba(255, 255, 255, 0.8); color: black; border-radius: 10px; font-size: 16px; font-weight: bold; text-align: center; z-index: 9999;">
+            Movie added successfully!
+        </div>
+        <div id="results-modal" class="modal">
+            <div class="results-modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <div class="results-modal-body">
+                    <div class="results-modal-left-section">
+                        <h2>Movie details</h2>
+                        <p id="results-modal-director"> <strong>Director:</strong> <span> <em>No director specified</em> </span> </p>
+                        <p id="results-modal-average-vote"> <strong>Average vote:</strong> <span> <em>No average vote</em> </span> </p>
+                        <p id="results-modal-original-language"> <strong>Original Language:</strong> <span> <em>No language specified</em> </span> </p>
+                        <h2>Overview</h2>
+                        <p id="results-modal-overview"><span> <em>No overview available.</em> </span></p>
+                        <h2>Keywords</h2>
+                        <ul id="results-modal-keywords">
+                        </ul>
+                    </div>
+                    <div class="results-modal-right-section">
+                        <img id="results-modal-thumbnail" src="/files/noimage.png" alt="Movie Thumbnail" onerror="this.src='files/noimage.png'"/>
+                        <h2 id="results-modal-title"> <span> <em>No title</em> </span> </h2>
+                        <p id="results-modal-release-date"> <strong>Release Date:</strong> <span> <em>No release date</em> </span> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="show-modal" class="modal">
+            <div class="show-modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <div class="show-modal-body">
+                    <div class="show-modal-left-section">
+                        <h2>Movie details</h2>
+                        <p id="show-modal-director"> <strong>Director:</strong> <span> <em>No director specified</em> </span> </p>
+                        <p id="show-modal-average-vote"> <strong>Average vote:</strong> <span> <em>No average vote</em> </span> </p>
+                        <p id="show-modal-original-language"> <strong>Original Language:</strong> <span> <em>No language specified</em> </span> </p>
+                        <h2>Overview</h2>
+                        <p id="show-modal-overview"><span> <em>No overview available.</em> </span></p>
+                        <h2>Keywords</h2>
+                        <ul id="show-modal-keywords">
+                        </ul>
+                    </div>
+                    <div class="show-modal-right-section">
+                        <img id="show-modal-thumbnail" src="/files/noimage.png" alt="Movie Thumbnail" onerror="this.src='files/noimage.png'"/>
+                        <h2 id="show-modal-title"> <span> <em>No title</em> </span> </h2>
+                        <p id="show-modal-release-date"> <strong>Release Date:</strong> <span> <em>No release date</em> </span> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="edit-modal" class="modal">
+            <div class="edit-modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <div class="edit-modal-body"> 
+                </div> 
+            </div>
+        </div>
+        <div id="new-modal" class="modal">
+            <div class="new-modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <div class="new-modal-body"> 
+                </div> 
+            </div>
+        </div>
+        <div id="my-keywords-modal" class="modal">
+            <div class="my-keywords-modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <div class="my-keywords-modal-body"> 
+                </div> 
+            </div>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <section id="home">
+                    </section>
+                </div>
+                <div class="swiper-slide">
+                    <section id="movies">
+                    </section>
+                </div>
+                <div class="swiper-slide">
+                    <section id="profile">
+                    </section>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Navigation Buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>        
     </main>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./app/Navigation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.0/dist/interact.min.js"></script>
 </body>
 </html>

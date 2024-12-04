@@ -1,9 +1,5 @@
 body { --primary: #E50914; --secondary: #FF5A4A; padding: 0px; margin: 0px; background-color: black; color: white}
 * {font-family: 'Roboto', sans-serif; box-sizing: border-box;}
-div.scrollsnap-carousel::-webkit-scrollbar {height: 10px;}
-div.scrollsnap-carousel::-webkit-scrollbar-track {background: #333;}
-div.scrollsnap-carousel::-webkit-scrollbar-thumb {background: var(--primary)}
-div.scrollsnap-carousel::-webkit-scrollbar-thumb:hover {background: var(--secondary);}
 button {  
     -webkit-font-smoothing: antialiased;
     display: inline-block;
@@ -87,7 +83,6 @@ div.field#field-search {margin-top: 0px;}
 
 .show-modal-content, .results-modal-content {
     background-color: #fff;
-    opacity: 0.9;
     width: 100%;
     max-width: 800px;
     height: 100%;
@@ -110,7 +105,7 @@ div.field#field-search {margin-top: 0px;}
     color: #333;
 }
 
-.show-modal-left-section, .results-modal-left-section {
+.show-modal-left-section, .results-modal-left-section{
     width: 60%;
     background-color: #f4f4f4;
     padding: 20px;
@@ -160,12 +155,6 @@ div.field#field-search {margin-top: 0px;}
     border-radius: 10px;
 }
 
-.edit-modal-content, .new-modal-content {
-    background-color: rgba(244, 244, 244, 0.7);
-    padding: 20px;
-    border-radius: 20px;
-}
-
 /* User films */
 
   .scrollsnap-carousel {
@@ -180,9 +169,9 @@ div.field#field-search {margin-top: 0px;}
   }
   .scrollsnap-carousel .slide {
     display: inline-block;
-    height: 200px;
-    width: 100px;
-    flex: 0 0 100px;
+    height: 15%;
+    width: 15%;
+    flex: 0 0 15%;
     scroll-snap-align: center;
     view-timeline-name: --li-in-and-out-of-view;
     view-timeline-axis: inline;
@@ -202,9 +191,8 @@ div.field#field-search {margin-top: 0px;}
   .scrollsnap-carousel .slide .content {
     border-radius: 10px;
     width: 100%;
-    height: 100%;
     padding-bottom: 100%;
-    background: transparent;
+    background: lightblue;
     animation: linear rotateSlide both;
     animation-timeline: --li-in-and-out-of-view;
     position: relative;
@@ -219,7 +207,17 @@ div.field#field-search {margin-top: 0px;}
     animation: linear fadeContent both;
     animation-timeline: --li-in-and-out-of-view;
   }
-
+  .scrollsnap-carousel .slide .content .content-wrapper:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    background: linear-gradient(#112d37, black);
+    top: 100%;
+    left: 0;
+    border-radius: 10px 10px 0 0;
+  }
   @keyframes rotateSlide {
     0% {
       transform: translateX(-150%) rotateY(-45deg) translateZ(4em) scale(0.75);
@@ -227,7 +225,7 @@ div.field#field-search {margin-top: 0px;}
     }
     50% {
       transform: rotateY(0deg) translateZ(2em) scale(1.5);
-      background: transparent;
+      background: lightblue;
     }
     100% {
       transform: translateX(150%) rotateY(45deg) translateZ(4em) scale(0.85);
@@ -257,27 +255,3 @@ div.field#field-search {margin-top: 0px;}
     }
   }
   
-
-#profile div.movie {display: inline-block; width: 100%; height: 100%; padding: 2%; box-shadow: 0px 0px 15px var(--primary); margin: 0 ; padding-top: 5%; background-color: #0f0f0f; border-radius: 8px; text-align: center; transition: transform 0.2s ease; white-space: wrap;}
-#profile div.movie div.movie-img {width: 100%; height: 120px; overflow: hidden; border-radius: 8px; margin-bottom: 5%; cursor: pointer; display: flex; align-items: center;}
-#profile div.movie div.movie-img img {width: 100%; height: 100%; object-fit: cover; object-fit: contain;}
-#profile div.movie div.title {font-size: 12px; color: white; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-#profile div.movie div.actions {padding: 2%; margin: 0}
-#profile div.movie button {  
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    text-decoration: none;
-    margin: 1%;
-    color: var(--primary);
-    background: #0f0f0f;
-    border: 1px solid var(--primary);
-    height: 20px;
-    width: 40%;
-    font-size: 8px;
-    font-weight: bold;
-    border-radius: 6px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: ease-in 0.2s all;
-    padding: 0 5%;
-}
