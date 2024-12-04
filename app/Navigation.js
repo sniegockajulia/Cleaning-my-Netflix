@@ -3,7 +3,7 @@
  *
  */
 
-// INITIALIZATION
+// PAGE INITIALIZATION
 
 
 document.addEventListener('DOMContentLoaded', () => {
