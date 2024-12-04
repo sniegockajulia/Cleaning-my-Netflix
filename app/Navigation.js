@@ -5,14 +5,14 @@
 
 // INITIALIZATION
 
-let swiper;
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('a');
     const sections = document.querySelectorAll('section');
 
-    swiper = new Swiper('.swiper-container', {
+    let swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
         loop: false,
         speed: 500,
