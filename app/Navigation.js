@@ -5,41 +5,41 @@
 
 // INITIALIZATION
 
-let swiper = new Swiper('.swiper-container', {
-    direction: 'horizontal',
-    loop: false,
-    speed: 500,
-    spaceBetween: 20, 
-    effect: 'slide',
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-
-    on: {
-        slideChangeTransitionEnd: function () {
-          // Remove active animation class from all elements
-          document.querySelectorAll('.animate-active').forEach((el) => {
-            el.classList.remove('animate-active');
-          });
-    
-          // Add active class to elements in the active slide
-          const activeSlide = document.querySelector('.swiper-slide-active');
-          activeSlide.querySelectorAll('.animate-from-top, .animate-from-right').forEach((el) => {
-            el.classList.add('animate-active');
-          });
-        },
-      },
-    
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('a');
     const sections = document.querySelectorAll('section');
+
+    const swiper = new Swiper('.swiper-container', {
+        direction: 'horizontal',
+        loop: false,
+        speed: 500,
+        spaceBetween: 20, 
+        effect: 'slide',
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        on: {
+            slideChangeTransitionEnd: function () {
+              // Remove active animation class from all elements
+              document.querySelectorAll('.animate-active').forEach((el) => {
+                el.classList.remove('animate-active');
+              });
+        
+              // Add active class to elements in the active slide
+              const activeSlide = document.querySelector('.swiper-slide-active');
+              activeSlide.querySelectorAll('.animate-from-top, .animate-from-right').forEach((el) => {
+                el.classList.add('animate-active');
+              });
+            },
+          },
+        
+    });
 
     document.getElementById('home').innerHTML = searchView();
     document.getElementById('movies').innerHTML = resultsView(my_results);
