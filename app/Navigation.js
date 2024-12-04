@@ -7,6 +7,7 @@
 
 let swiper;
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('a');
     const sections = document.querySelectorAll('section');
