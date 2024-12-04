@@ -5,12 +5,13 @@
 
 // PAGE INITIALIZATION
 
+let swiper;
 
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('a');
     const sections = document.querySelectorAll('section');
 
-    const swiper = new Swiper('.swiper-container', {
+    swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
         loop: false,
         speed: 500,
