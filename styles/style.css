@@ -160,7 +160,7 @@ div.field#field-search {margin-top: 0px;}
     border-radius: 10px;
 }
 
-.edit-modal-content, .new-modal-content, .new-modal-content {
+.edit-modal-content, .new-modal-content, .my-keywords-modal-content {
     background-color: rgba(244, 244, 244, 0.7);
     padding: 20px;
     border-radius: 20px;
