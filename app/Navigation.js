@@ -1,6 +1,6 @@
 /**
  * Navigation.js
- * Este archivo gestiona la navegación entre las secciones de la aplicación.
+ *
  */
 
 // INITIALIZATION
