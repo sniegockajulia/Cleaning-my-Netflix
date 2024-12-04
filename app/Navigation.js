@@ -25,6 +25,22 @@ document.addEventListener('DOMContentLoaded', () => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+
+        on: {
+            slideChangeTransitionEnd: function () {
+              // Remove active animation class from all elements
+              document.querySelectorAll('.animate-active').forEach((el) => {
+                el.classList.remove('animate-active');
+              });
+        
+              // Add active class to elements in the active slide
+              const activeSlide = document.querySelector('.swiper-slide-active');
+              activeSlide.querySelectorAll('.animate-from-top, .animate-from-right').forEach((el) => {
+                el.classList.add('animate-active');
+              });
+            },
+          },
+        
     });
 
     document.getElementById('home').innerHTML = searchView();
@@ -37,6 +53,57 @@ document.addEventListener('DOMContentLoaded', () => {
             swiper.slideTo(index);
         });
     });
+
+    const moviesContainer = document.querySelector('.scrollsnap-carousel'); // Target the container of movie items
+
+    interact('.movie')
+        .draggable({
+            // Enable dragging
+            inertia: true, // Add inertia for smooth drag
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: 'parent', // Restrict movement to the parent container
+                    endOnly: true
+                })
+            ],
+            listeners: {
+                start(event) {
+                    // Add a class to indicate dragging
+                    event.target.classList.add('dragging');
+                },
+                move(event) {
+                    // Optionally, handle the movement during dragging (if needed)
+                    const target = event.target;
+                    target.style.transform = `translate(${event.pageX - event.clientX}px, ${event.pageY - event.clientY}px)`;
+                },
+                end(event) {
+                    // Remove the dragging class when drag ends
+                    event.target.classList.remove('dragging');
+                    // Reset the style after drag
+                    event.target.style.transform = '';
+                }
+            }
+        })
+        .on('dragmove', function (event) {
+            const target = event.target;
+            // Optionally handle the movement while dragging (if needed)
+        });
+
+    // Handle the drop event to reorder the movie items
+    interact('.movie')
+        .dropzone({
+            accept: '.movie', // Only allow dropping of movie items
+            ondrop: function (event) {
+                const draggedElement = event.relatedTarget; // The dragged element
+                const targetElement = event.target; // The target where it is dropped
+
+                // Move the dragged movie item to the new position
+                const parent = targetElement.parentNode;
+                if (parent) {
+                    parent.insertBefore(draggedElement, targetElement);
+                }
+            }
+        });
 
 });
 
@@ -612,6 +679,9 @@ window.addEventListener("click", (e) => {
         document.getElementById("my-keywords-modal").style.display = "none";
     }
 });
+
+
+
 
 
 
