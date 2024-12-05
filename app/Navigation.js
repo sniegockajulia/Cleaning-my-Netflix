@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
+        autoHeight: true,
         loop: false,
         speed: 500,
         spaceBetween: 20, 
@@ -170,7 +171,7 @@ const resultsView = (results) => {
                     </div>`;
             });
     } else {
-        view += `<p>No results found</p>`;
+        view += `<p style="text-align: center; margin: 0 auto;"><em>No results found</em></p>`;
     }
     return view;
 };
@@ -353,6 +354,7 @@ const createContr = () => {
             my_movies.push(newMovie);
             localStorage.my_movies = JSON.stringify(my_movies);
             window.scrollTo(0, 0);
+            document.getElementById("new-modal").style.display = "none";
             indexContr();
         } else {
             alert("Please fill in all fields.");
@@ -376,6 +378,7 @@ const updateContr = (i) => {
     my_movies[i].overview = document.getElementById('edit-overview').value;
     my_movies[i].original_language = document.getElementById('edit-original-language').value;
     localStorage.my_movies = JSON.stringify(my_movies);
+    document.getElementById("edit-modal").style.display = "none";
     window.scrollTo(0, 0);
     indexContr();
 };
@@ -586,7 +589,12 @@ const matchEvent = (ev, sel) => ev.target.matches(sel);
 const myId = (ev) => Number(ev.target.dataset.myId);
 
 document.addEventListener('click', ev => {
-    if      (matchEvent(ev, '.index'))  indexContr  ();
+    if      (matchEvent(ev, '.index'))  {
+        indexContr  ();
+        document.getElementById("edit-modal").style.display = "none";
+        document.getElementById("new-modal").style.display = "none";
+        document.getElementById("my-keywords-modal").style.display = "none";
+    } 
     else if (matchEvent(ev, '.edit'))   editModalContr   (myId(ev));
     else if (matchEvent(ev, '.update')) updateContr (myId(ev));
     // Complete by adding the missing controllers
