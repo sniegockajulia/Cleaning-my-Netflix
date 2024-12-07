@@ -9,11 +9,11 @@ let swiper;
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    localStorage.my_results = JSON.stringify([]);
     document.getElementById('home').innerHTML = searchView();
     document.getElementById('movies').innerHTML = resultsView(my_results);
     document.getElementById('profile').innerHTML = indexView(my_movies);
-
+    
+    localStorage.my_results = JSON.stringify([]);
     const links = document.querySelectorAll('a');
     
     links.forEach((link, index) => {
@@ -114,14 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.target.classList.add('dragging');
                 event.target.style.transition = "transform 0.2s";
                 event.target.style.transform = "scale(0.5)";
-                swiper.disable();
+                swiper.allowSlidePrev = false;
+                swiper.allowSlideNext = false;
                 
                 const rect = event.target.getBoundingClientRect();
                 event.target.dataset.originalWidth = rect.width;
                 event.target.dataset.originalHeight = rect.height;
             },
             move(event) {
-                swiper.disable();
                 const target = event.target;
                 const scaleFactor = 0.7;
                 const adjustedX = (dPos.x + event.delta.x) / scaleFactor;
@@ -132,16 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 dPos.y += event.delta.y;
 
                 target.style.zIndex = '1000';
+                
             },
             end(event) {
-                swiper.disable()
                 const target = event.target;
                 target.style.transition = "transform 0.2s";
                 target.style.transform = "scale(1)";
                 dPos = { x: 0, y: 0 };
                 target.style.zIndex = '';
                 target.classList.remove('dragging');
-                swiper.enable();
+                swiper.allowSlidePrev = true;
+                swiper.allowSlideNext = true;
             }
         }
     });
@@ -184,6 +185,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 my_results = JSON.parse(localStorage.my_results);
 
                 document.getElementById('movies').innerHTML = resultsView(my_results);
+                document.querySelectorAll('.swiper-slide').forEach((slide) => {
+                    const h1 = slide.querySelector('h1');
+                    const description = slide.querySelector('.section-description');
+                    const left_arrow = document.querySelector('.swiper-button-prev');
+                    const right_arrow = document.querySelector('.swiper-button-next');
+                    if (h1) {
+                        h1.style.opacity = 1;
+                        h1.style.transform = 'translateY(0)';
+                    }
+                    if (description) {
+                        description.style.opacity = 1;
+                        description.style.transform = 'translateX(0)';
+                    }
+
+                });
+
+                
             }
         });
 });
