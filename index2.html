@@ -18,8 +18,9 @@
       height: 100vh;
     }
     .swiper {
-      width: 80%;
-      height: 50%;
+      width: 90%;
+      max-width: 600px;
+      height: 300px;
     }
     .swiper-slide {
       display: flex;
@@ -53,6 +54,8 @@
         el: '.swiper-pagination',
         clickable: true,
       },
+      // Enable touch interactions
+      touchEventsTarget: 'container',
     });
   </script>
 </body>
