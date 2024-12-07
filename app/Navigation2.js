@@ -8,28 +8,12 @@
 let swiper;
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    localStorage.my_results = JSON.stringify([]);
-    document.getElementById('home').innerHTML = searchView();
-    document.getElementById('movies').innerHTML = resultsView(my_results);
-    document.getElementById('profile').innerHTML = indexView(my_movies);
-
     const links = document.querySelectorAll('a');
-    
-    links.forEach((link, index) => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const navigationType = link.getAttribute('navigation-type');
-            if (navigationType === 'slide') {
-                swiper.slideTo(index);
-            }
-        });
-    });
 
     swiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
         autoHeight: true,
-        loop: false,
+        loop: true,
         speed: 500,
         spaceBetween: 20, 
         effect: 'slide',
@@ -40,69 +24,62 @@ document.addEventListener('DOMContentLoaded', () => {
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
-            nextSlide: function() {
-                swiper.slideNext();
-            },
-            prevSlide: function() {
-                swiper.slidePrev();
-            }
         },
 
         on: {
             slideChangeTransitionStart: function () {
-                document.querySelectorAll('.swiper-slide').forEach((slide) => {
-                    const h1 = slide.querySelector('h1');
-                    const description = slide.querySelector('.section-description');
-                    const button_prev = document.querySelector('.swiper-button-prev');
-                    const button_next = document.querySelector('.swiper-button-next');
-
-                    slide.classList.remove('animate-slide-fade');
-                    slide.classList.remove('animate-slide-zoom');
+                document.querySelectorAll('section').forEach((section) => {
+                    const h1 = section.querySelector('h1');
+                    const description = section.querySelector('.section-description');
                     if (h1) h1.classList.remove('animate-h1');
                     if (description) description.classList.remove('animate-description');
-                    if (button_prev) button_prev.classList.remove('animate-arrows');
-                    if (button_next) button_next.classList.remove('animate-arrows');
-
                 });
-                
             },
             
             slideChangeTransitionEnd: function () {
-                const activeSlide = this.slides[this.activeIndex];
-                const h1 = activeSlide.querySelector('h1');
-                const description = activeSlide.querySelector('.section-description');
-                const button_prev = document.querySelector('.swiper-button-prev');
-                const button_next = document.querySelector('.swiper-button-next');
-                
-                const animationType = links[swiper.realIndex].getAttribute('animation-type');
-                if (animationType === 'fade') {
-                    activeSlide.classList.add('animate-slide-fade');
-                    if (button_prev) button_prev.classList.add('animate-arrows');
-                    if (button_next) button_next.classList.add('animate-arrows');
-                } else if (animationType === 'zoom') {
-                    activeSlide.classList.add('animate-slide-zoom');
-                    if (button_prev) button_prev.classList.add('animate-arrows');
-                    if (button_next) button_next.classList.add('animate-arrows');
-                }
+                const activeSection = this.slides[this.activeIndex].querySelector('section');
+                const h1 = activeSection.querySelector('h1');
+                const description = activeSection.querySelector('.section-description');
                 if (h1) h1.classList.add('animate-h1');
                 if (description) description.classList.add('animate-description');
-
             },
         },
     });
 
-    const firstSlide = swiper.slides[swiper.activeIndex];
-    if (firstSlide) {
-        firstSlide.classList.add('animate-slide-fade');
-        const button_prev = document.querySelector('.swiper-button-prev');
-        const button_next = document.querySelector('.swiper-button-next');
-        const h1 = firstSlide.querySelector('h1');
-        const description = firstSlide.querySelector('.section-description');
-        if (button_prev) button_prev.classList.add('animate-arrows');
-        if (button_next) button_next.classList.add('animate-arrows');
+    const firstSection = swiper.slides[swiper.activeIndex].querySelector('section');;
+    if (firstSection) {
+        firstSection.classList.add('animate-section');
+        const h1 = firstSection.querySelector('h1');
+        const description = firstSection.querySelector('.section-description');
         if (h1) h1.classList.add('animate-h1');
         if (description) description.classList.add('animate-description');
     }
+
+    links.forEach((link, index) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const href = link.getAttribute('href');
+            const targetSection = document.querySelector(href);
+            const navigationType = link.getAttribute('navigation-type');
+            const animationType = link.getAttribute('animation-type');
+            
+            
+
+            if (animationType === 'fade') {
+                targetSection.classList.add('fade-animation');
+            } else if (animationType === 'zoom') {
+                targetSection.classList.remove('zoom-animation');
+                targetSection.classList.add('zoom-animation');
+            }
+
+            if (navigationType === 'slide') {
+                swiper.slideTo(index);
+            }
+
+            
+        });
+    });
 
     let dPos = { x: 0, y: 0 };
 
@@ -184,6 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 my_results = JSON.parse(localStorage.my_results);
 
                 document.getElementById('movies').innerHTML = resultsView(my_results);
+                document.querySelectorAll('.swiper-slide').forEach((slide) => {
+                const h1 = slide.querySelector('h1');
+                const description = slide.querySelector('.section-description');
+                if (h1) {
+                    h1.style.opacity = 1;
+                    h1.style.transform = 'translateY(0)';
+                }
+                if (description) {
+                    description.style.opacity = 1;
+                    description.style.transform = 'translateX(0)';
+                }
+                });
             }
         });
 });

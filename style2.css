@@ -1,6 +1,4 @@
-html, body {
-    height: auto;}
-body {--primary: #E50914; --secondary: #FF5A4A; padding: 0px; margin: 0px; background-color: blue; color: white; position: relative}
+body {--primary: #E50914; --secondary: #FF5A4A; padding: 0px; margin: 0px; background-color: black; color: white; position: relative}
 * {font-family: 'Roboto', sans-serif; box-sizing: border-box;}
 div.scrollsnap-carousel::-webkit-scrollbar {height: 10px;}
 div.scrollsnap-carousel::-webkit-scrollbar-track {background: #333;}
@@ -32,7 +30,7 @@ main {padding: 0px; margin: 30px 50px 0px 50px; position: relative; }
 .swiper-wrapper {height: 100%; padding: 0px; margin: 0px;}
 .swiper-slide {overflow:hidden; min-height: calc(100vh - 87px); margin: 0px;}
 .swiper-container .swiper-button-next, .swiper-container .swiper-button-prev {color: white;}
-.swiper-container .swiper-button-next, .swiper-container .swiper-button-prev {position: absolute; top: 49px; z-index: 10;}
+.swiper-container .swiper-button-next, .swiper-container .swiper-button-prev {position: absolute; top: -26px; z-index: 10;}
 .swiper-container .swiper-button-next {right: 30px;}
 .swiper-container .swiper-button-prev {left: 30px;}
 .swiper-container .swiper-pagination-bullet {background-color: white;}
@@ -47,7 +45,7 @@ input, textarea {margin-bottom: 10px; padding: 6px; font-size: 14px; width:100%;
 #field-search input {min-width: 80%;}
 div.actions { margin-top: 15px;}
 
-div.movie {display: inline-block; width: 100%; height: 100%; padding: 15px; box-shadow: 0px 0px 15px var(--primary); margin: 10px; background-color: #0f0f0f; border-radius: 8px; text-align: center; transition: transform 0.2s ease; white-space: wrap;}
+div.movie {display: inline-block; width: 100%; height: 100%; padding: 15px; box-shadow: 0px 0px 15px var(--primary); margin: 10px; background-color: #0f0f0f; border-radius: 8px; text-align: center; transition: transform 0.3s ease;  white-space: wrap;}
 div.movie#result-movie {display: inline-block; width: 150px;}
 div.movie:hover {transform: scale(1.05);}
 div.movie div.movie-img {width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center;}
@@ -67,14 +65,23 @@ div.field#field-search {margin-top: 0px;}
 #new-overview, #edit-overview {width: 600px; height: 60px}
 
 #spinner {display: flex; justify-content: center; align-items: center; height: auto; margin: 0px 0;}
-.spinner {border: 4px solid rgba(255, 255, 255, 0.3); border-top: 4px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite;}
+.spinner {border: 4px solid rgba(255, 255, 255, 0.3); border-top: 4px solid var(--primary); border-radius: 50%; width: 30px; height: 30px; animation: spinner-spin 1s linear infinite;}
 
-@keyframes spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
+@keyframes spinner-spin {0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
 @media screen and (max-width: 768px) { .movie {width: 45%;} .field input {width: 100%; max-width: 100%;} button {font-size: 14px;}}
 @media screen and (max-width: 480px) {.movie {width: 90%;}}
 
-
 /* Modals */
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
 .modal {
     display: none; 
     position: fixed; 
@@ -105,15 +112,6 @@ div.field#field-search {margin-top: 0px;}
 
 #results-modal-title {text-align: center; word-wrap: break-word;}
 .show-modal-body, .results-modal-body {display: flex; height: 100%;}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-}
 
 .show-modal-left-section, .results-modal-left-section {
     width: 60%;
@@ -171,9 +169,10 @@ div.field#field-search {margin-top: 0px;}
     border-radius: 20px;
 }
 
-/* User films */
+/* Carousel */
 
   .scrollsnap-carousel {
+    position: relative;
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
@@ -261,11 +260,12 @@ div.field#field-search {margin-top: 0px;}
       z-index: 1;
     }
   }
-  
 
-#profile div.movie {cursor: grab; display: inline-block; width: 100%; height: 100%; padding: 2%; box-shadow: 0px 0px 15px var(--primary); margin: 0 ; padding-top: 5%; background-color: #0f0f0f; border-radius: 8px; text-align: center; transition: transform 0.2s ease; white-space: wrap;}
-#profile div.movie div.movie-img {width: 100%; height: 120px; overflow: hidden; border-radius: 8px; margin-bottom: 5%; cursor: pointer; display: flex; align-items: center;}
-#profile div.movie div.movie-img img {width: 100%; height: 100%; object-fit: cover; object-fit: contain;}
+/* User movies */
+
+#profile div.movie {display: inline-block; width: 100%; height: 100%; padding: 2%; box-shadow: 0px 0px 15px var(--primary); margin: 0 ; padding-top: 5%; background-color: #0f0f0f; border-radius: 8px; text-align: center; transition: transform 0.2s ease; white-space: wrap;}
+#profile div.movie div.movie-img {width: 100%; height: 120px; overflow: hidden; border-radius: 8px; margin-bottom: 5%; display: flex; align-items: center;}
+#profile div.movie div.movie-img img {width: 100%; height: 100%; object-fit: cover; object-fit: contain; cursor: pointer;}
 #profile div.movie div.title {font-size: 12px; color: white; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 #profile div.movie div.actions {padding: 2%; margin: 0}
 #profile div.movie button {  
@@ -277,7 +277,7 @@ div.field#field-search {margin-top: 0px;}
     background: #0f0f0f;
     border: 1px solid var(--primary);
     height: 20px;
-    width: 40%;
+    width: 45%;
     font-size: 8px;
     font-weight: bold;
     border-radius: 6px;
@@ -286,35 +286,8 @@ div.field#field-search {margin-top: 0px;}
     transition: ease-in 0.2s all;
     padding: 0 5%;
 }
-
-#profile .movie.dragging {
-    opacity: 0.5;
-    transform: scale(1.05);
-    cursor: grabbing;
-}
-
-/* Default hidden state */
-.h1, .section-description {
-    opacity: 0;
-    transform: translateY(-100px); /* From top */
-    transition: transform 0.5s ease, opacity 0.5s ease;
-  }
+#profile div.movie button:hover {background: var(--primary); color: white;}
   
-  .section-description {
-    transform: translateX(100px); /* From right */
-  }
-  
-  /* Active state */
-  .animate-active {
-    opacity: 1;
-    transform: translateY(0); /* Reset */
-  }
-  
-  .section-description.animate-active {
-    transform: translateX(0); /* Reset */
-  }
-  
-
 /* Movie animation */
 
   @property --rotate {
@@ -340,7 +313,7 @@ div.field#field-search {margin-top: 0px;}
     text-align: center;
     display: flex;
     color: rgb(88 199 250 / 0%);
-    cursor: pointer;
+    cursor: arrow;
     font-family: cursive;
   }
   
@@ -388,9 +361,9 @@ div.field#field-search {margin-top: 0px;}
       --rotate: 360deg;
     }
   }
-
   
 /* Background animation */
+
 body::before, body::after {
     content: "";
     position: absolute;
@@ -403,7 +376,64 @@ body::before, body::after {
       #ff5d5d, #e33c3c 43%, #c20003
     );
     animation: spin 2.5s linear infinite;
-    z-index: -1; /* Keep it behind the content */
-  }
+    z-index: -1;
+}
 
-  
+/* Movies container */
+
+#movies .movie{transition: transform 0.3s ease;}
+#movies .movie.dragging {opacity: 0.5; transform: scale(1.05); cursor: grabbing;}
+.movies-container {display: flex; flex-wrap: wrap;}
+.movie-block {display: flex; align-items: center; padding-bottom: 15px;}
+
+.drop-zone {height: 100%; width: 10px; background-color: transparent;}
+.hovered-dropzone {border-style: dotted;}
+
+/* Navigation animation */
+
+.swiper-slide, h1, .section-description {opacity: 0; animation: none;}
+.swiper-button-prev, .swiper-button-next {animation: none;}
+
+.animate-slide-fade {animation: fadeIn 2s ease forwards;}
+.animate-slide-zoom {animation: fadeIn 2s ease forwards, zoomIn 2s ease forwards;}
+.animate-h1 {animation: fadeIn 1s ease forwards, dropDown 1s ease forwards;}
+.animate-arrows {animation: goDown 1s ease forwards;}
+.animate-description {animation: fadeIn 1s ease forwards, slideInFromLeft 1s ease forwards;}
+
+@keyframes fadeIn {0% {opacity: 0;} 100% {opacity: 1;}}
+
+@keyframes dropDown {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes goDown {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(70px);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+      transform: translateX(-50px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+      transform: scale(0.9);
+  }
+  to {
+      transform: scale(1);
+  }
+}
